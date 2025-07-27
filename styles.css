@@ -8,14 +8,28 @@
   --button-h: 48px;
 }
 
+/* 1. All text except Batzy in requested professional stack */
+body, html, .glass-card, .subtitle, .projects-list, .project-card,
+.page-section, .glass-card h2, .glass-card h3, .glass-card ul, .glass-card li, .glass-card p, .navigation, .nav-btn {
+  font-family:
+    'Jost', 'Kanit', 'M PLUS 1p', 'Montserrat', 'Playwrite HU', 'Playwrite PL', 'Parkinsans', Arial, sans-serif !important;
+  font-display: swap;
+}
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   background: #000;
-  font-family: 'Inter', 'Montserrat', Arial, sans-serif;
 }
 
+/* 2. Batzy brand font (Play, bold, standout) */
+.title-glow.batzy-font {
+  font-family: 'Play', 'Jost', Arial, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Glass morphism and layout styles below... */
 #particle-bg {
   position: fixed;
   top: 0; left: 0;
@@ -24,7 +38,6 @@ html, body {
   background: #000;
   pointer-events: auto;
 }
-
 .main-wrapper {
   position: relative;
   z-index: 2;
@@ -38,12 +51,10 @@ html, body {
   animation: var(--fade-in);
   opacity: 1;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px);}
   to { opacity: 1; transform: none;}
 }
-
 .glass-card {
   background: var(--base-bg);
   border-radius: 20px;
@@ -59,38 +70,32 @@ html, body {
   transform: translateY(22px) scale(0.98);
   animation: cardPop 1.1s cubic-bezier(.28,.84,.81,1.11) forwards;
 }
-
 @keyframes cardPop {
   from { opacity: 0; transform: translateY(60px) scale(0.92);}
   60% { opacity: 1; transform: scale(1.04);}
   to { opacity: 1; transform: none;}
 }
-
 .intro {
   margin-bottom: 10px;
   box-shadow: 0 8px 44px #09e4fa19;
   animation-delay: 0.3s;
 }
-
 .page-section {
   display: none;
   opacity: 0;
   transform: translateY(24px) scale(0.97);
   transition: opacity 0.44s cubic-bezier(.64,.04,.36,1), transform 0.44s;
 }
-
 .page-section.active {
   display: block;
   opacity: 1;
   transform: none;
   animation: sectionIn 0.7s cubic-bezier(.28,.84,.61,1.11) forwards;
 }
-
 @keyframes sectionIn {
   from { opacity: 0; transform: translateY(35px) scale(0.95);}
   to { opacity: 1; transform: none;}
 }
-
 .glass-card h2 {
   margin-top: 0;
   color: var(--accent);
@@ -98,7 +103,6 @@ html, body {
   letter-spacing: 1px;
   text-shadow: 0 2px 18px #09e4fa55;
 }
-
 .title-glow {
   font-size: 2.2rem;
   letter-spacing: 0.5px;
@@ -109,14 +113,12 @@ html, body {
   filter: drop-shadow(0px 0px 14px #00aaff88);
   margin-bottom: 8px;
 }
-
 .subtitle {
   color: #B9E6F6;
   font-size: 1.04rem;
   margin-top: 5px;
   letter-spacing: 0.7px;
 }
-
 .navigation {
   display: flex;
   gap: 13px;
@@ -125,6 +127,7 @@ html, body {
   background: none;
   align-items: center;
 }
+/* 3. Nav button styling and text hover/click effect (cyan color) */
 .nav-btn {
   background: var(--base-bg);
   border: 1.5px solid var(--accent-dark);
@@ -136,21 +139,25 @@ html, body {
   min-width: 127px;
   padding: 0 23px;
   cursor: pointer;
-  transition: background 0.25s cubic-bezier(.51,.2,.54,1.1),color .16s,box-shadow .21s,border 0.18s;
+  transition: background 0.25s, color 0.17s, box-shadow 0.21s, border 0.18s;
   box-shadow: 0 3px 14px #00d5fa29;
   letter-spacing: 0.3px;
+  outline: none;
+  border: none;
 }
 .nav-btn.active,
-.nav-btn:hover {
+.nav-btn:hover,
+.nav-btn:focus,
+.nav-btn:active {
   background: linear-gradient(92deg, #0de0ffbb 0%, #024b5279 93%);
-  color: #08131c;
+  color: var(--accent) !important;
   border: 1.5px solid #09e4fa;
   box-shadow: 0 9px 28px #19f9ee48;
 }
-
-.page-section {
-  margin-top: 2px;
+.nav-btn:focus-visible {
+  color: var(--accent);
 }
+.page-section { margin-top: 2px; }
 #skills ul {
   list-style: none;
   padding: 0;
@@ -160,20 +167,10 @@ html, body {
   text-align: left;
   line-height: 1.64;
 }
-#skills ul li {
-  padding-left: 3px;
-}
-#skills ul li::before {
-  content: "●";
-  color: var(--accent);
-  padding-right: 9px;
-}
+#skills ul li { padding-left: 3px; }
+#skills ul li::before { content: "●"; color: var(--accent); padding-right: 9px; }
 .projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 16px;
-  align-items: center;
+  display: flex; flex-direction: column; gap: 14px; margin-top: 16px; align-items: center;
 }
 .project-card {
   background: rgba(14,27,35,0.75);
@@ -206,16 +203,12 @@ html, body {
   color: #fff;
   text-decoration: underline;
 }
-
 a { color: var(--accent); text-decoration: none;}
 a:hover { text-decoration: underline; color: #19e0ed;}
-
 @media (max-width: 610px) {
-  .glass-card, .page-section { padding: 13px 7px; min-width: unset; max-width: 98vw;}
-  .navigation { flex-direction: column; gap: 8px;}
-  .nav-btn { min-width: unset; font-size: 0.97rem; width: 100%;}
+  .glass-card, .page-section { padding: 13px 7px; min-width: unset; max-width: 98vw; }
+  .navigation { flex-direction: column; gap: 8px; }
+  .nav-btn { min-width: unset; font-size: 0.97rem; width: 100%; }
   .projects-list { gap: 11px; }
 }
-
-/* Show main card and section after initial load */
-.glass-card, .page-section { opacity: 1; transform: none;}
+.glass-card, .page-section { opacity: 1; transform: none; }
