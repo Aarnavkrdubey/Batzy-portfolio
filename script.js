@@ -65,25 +65,19 @@ function createStars() {
 function animate() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, W, H);
-
-  // Clean up faded burst stars
   stars = stars.filter(star => !star.burst || (star.life > 0.03 && star.radius > 0.3));
-
   for (let star of stars) star.update();
   for (let star of stars) star.draw();
-
   parallax.x *= 0.89;
   parallax.y *= 0.89;
   requestAnimationFrame(animate);
 }
-
 // Mouse parallax
 canvas.addEventListener("mousemove", e => {
   parallax.x = ((e.clientX - lastMouse.x) / W) * 2.9;
   parallax.y = ((e.clientY - lastMouse.y) / H) * 2.9;
   lastMouse = { x: e.clientX, y: e.clientY };
 });
-
 // Star burst effect on click
 canvas.addEventListener("click", e => {
   const burst = 18, cx = e.clientX, cy = e.clientY;
@@ -101,7 +95,6 @@ canvas.addEventListener("click", e => {
     );
   }
 });
-
 window.addEventListener("resize", () => {
   W = window.innerWidth;
   H = window.innerHeight;
@@ -109,7 +102,6 @@ window.addEventListener("resize", () => {
   canvas.height = H;
   createStars();
 });
-
 // Navigation logic
 const navBtns = document.querySelectorAll('.nav-btn');
 const sections = document.querySelectorAll('.page-section');
@@ -124,7 +116,6 @@ navBtns.forEach(btn => {
     document.getElementById(btn.dataset.section).classList.add('active');
   });
 });
-
 window.addEventListener('DOMContentLoaded', () => {
   createStars();
   animate();
